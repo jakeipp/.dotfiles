@@ -9,10 +9,16 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-surround' " Select then S followed by a surround
+Plugin 'tpope/vim-fugitive' " Git wrapper
+Plugin 'tpope/vim-commentary' " Select then gc or just gcc
+Plugin 'mattn/emmet-vim' " Use <C-y>, to execute emmet
+Plugin 'sheerun/vim-polyglot'
+Plugin 'morhetz/gruvbox' " Gruvbox
+Plugin 'itchyny/lightline.vim' " Lightline (bar)
 Plugin 'preservim/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-commentary'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -30,7 +36,20 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " Set Colors
-    colorscheme darkblue
+    colorscheme gruvbox
+    set background=dark
+    set laststatus=2
+    let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
+
 
 " Set Clipboard to System:
     set clipboard=unnamed,unnamedplus
@@ -49,8 +68,19 @@ filetype plugin indent on    " required
     set number relativenumber
     set numberwidth=2
 
+" Netrw Options
+    let g:netrw_banner = 0
+    let g:netrw_liststyle = 3
+    " let g:netrw_browse_split = 4
+    let g:netrw_altv = 1
+    let g:netrw_winsize = 25
+    " set autochdir
+    " map <C-E> :Lexplore<CR>
+    map <C-E> :NERDTreeToggle<CR>
+    map <C-P> :FZF<CR>
+
 " Mouse:
-    "set mouse=a
+    set mouse=a
 
 " Search:
     set hlsearch
@@ -81,3 +111,6 @@ filetype plugin indent on    " required
 
 " New Tab:
     nnoremap <silent> <C-t> :tabnew<CR>
+
+" Save:
+    inoremap <C-s> <Esc>:w<CR>i
