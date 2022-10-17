@@ -19,11 +19,8 @@ Plugin 'itchyny/lightline.vim' " Lightline (bar)
 Plugin 'preservim/nerdtree'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
-Plugin 'jayli/vim-easycomplete'
-Plugin 'SirVer/ultisnips'
 Plugin 'neoclide/coc.nvim'
 
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -37,6 +34,36 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" COC Config
+    set signcolumn=yes
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    inoremap <silent><expr> <TAB>
+          \ coc#pum#visible() ? coc#pum#next(1) :
+          \ CheckBackspace() ? "\<Tab>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to
+    " format
+    " " <C-g>u breaks current undo, please make your own choice.
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    " Use `[g` and `]g` to navigate diagnostics
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in
+    " location list.
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+    
+    " GoTo code navigation.
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    
+     " Use K to show documentation in preview window.
+    nnoremap <silent> K :call ShowDocumentation()<CR>
 
 " Set Colors
     colorscheme gruvbox
@@ -80,6 +107,8 @@ filetype plugin indent on    " required
     " set autochdir
     " map <C-E> :Lexplore<CR>
     map <C-E> :NERDTreeToggle<CR>
+
+" FZF
     map <C-P> :FZF<CR>
 
 " Mouse:
