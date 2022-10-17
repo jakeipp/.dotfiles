@@ -19,6 +19,9 @@ Plugin 'itchyny/lightline.vim' " Lightline (bar)
 Plugin 'preservim/nerdtree'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'jayli/vim-easycomplete'
+Plugin 'SirVer/ultisnips'
+Plugin 'neoclide/coc.nvim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
