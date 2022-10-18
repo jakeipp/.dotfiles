@@ -1,13 +1,14 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+let mapleader = " "
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+" alternatively, pass a path where Vundle should install plugins
+"  call vundle#begin('~/some/path/here')
+call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround' " Select then S followed by a surround
 Plugin 'tpope/vim-fugitive' " Git wrapper
@@ -20,20 +21,10 @@ Plugin 'preservim/nerdtree'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'neoclide/coc.nvim'
+Plugin 'pechorin/any-jump.vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call vundle#end()
+filetype plugin indent on
 
 " COC Config
     set signcolumn=yes
@@ -44,6 +35,10 @@ filetype plugin indent on    " required
           \ CheckBackspace() ? "\<Tab>" :
           \ coc#refresh()
     inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    function! CheckBackspace() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
     " Make <CR> to accept selected completion item or notify coc.nvim to
     " format
@@ -64,6 +59,13 @@ filetype plugin indent on    " required
     
      " Use K to show documentation in preview window.
     nnoremap <silent> K :call ShowDocumentation()<CR>
+    function! ShowDocumentation()
+        if CocAction('hasProvider', 'hover')
+            call CocActionAsync('doHover')
+        else
+            call feedkeys('K', 'in')
+        endif
+    endfunction
 
 " Set Colors
     colorscheme gruvbox
@@ -82,7 +84,9 @@ filetype plugin indent on    " required
 
 
 " Set Clipboard to System:
-    set clipboard=unnamed,unnamedplus
+    set clipboard=unnamedplus
+    " Mac Setup
+    " set clipboard=unnamed
 
 " Tab Size:
     set tabstop=4
@@ -108,8 +112,20 @@ filetype plugin indent on    " required
     " map <C-E> :Lexplore<CR>
     map <C-E> :NERDTreeToggle<CR>
 
+" No Highlight Hotkey
+    map <leader>h :noh<CR>
+
 " FZF
-    map <C-P> :FZF<CR>
+    map <C-P> :Files<CR>
+    map <C-B> :Buffers<CR>
+    " Requires RipGrep
+    map <C-F> :Rg<CR>
+
+" AnyJump
+    map <leader>j :AnyJump<CR>
+
+" LazyGit
+    map <leader>gg :tab terminal ++close lazygit<CR>
 
 " Mouse:
     set mouse=a
