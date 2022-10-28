@@ -102,7 +102,7 @@ filetype plugin indent on
     set number relativenumber
     set numberwidth=2
 
-" Netrw Options
+" Netrw Options:
     let g:netrw_banner = 0
     let g:netrw_liststyle = 3
     " let g:netrw_browse_split = 4
@@ -112,20 +112,23 @@ filetype plugin indent on
     " map <C-E> :Lexplore<CR>
     map <C-E> :NERDTreeToggle<CR>
 
-" No Highlight Hotkey
+" No Highlight Hotkey:
     map <leader>h :noh<CR>
 
-" FZF
+" FZF:
     map <C-P> :Files<CR>
     map <C-B> :Buffers<CR>
     " Requires RipGrep
     map <C-F> :Rg<CR>
 
-" AnyJump
+" AnyJump:
     map <leader>j :AnyJump<CR>
 
-" LazyGit
+" LazyGit:
     map <leader>gg :tab terminal ++close lazygit<CR>
+
+" LazyDocker:
+    map <leader>dd :tab terminal ++close lazydocker<CR>
 
 " Mouse:
     set mouse=a
@@ -153,6 +156,19 @@ filetype plugin indent on
     map <C-j> <C-w>j
     map <C-k> <C-w>k
     map <C-l> <C-w>l
+
+" Tab Navigation:
+    noremap <leader>1 1gt
+    noremap <leader>2 2gt
+    noremap <leader>3 3gt
+    noremap <leader>4 4gt
+    noremap <leader>5 5gt
+    noremap <leader>6 6gt
+    noremap <leader>7 7gt
+    noremap <leader>8 8gt
+    noremap <leader>9 9gt
+    noremap <leader>0 :tablast<cr>
+    noremap <leader><Tab> :tabn<cr>
 
 " Replace All With S:
     nnoremap S :%s//g<Left><Left>
