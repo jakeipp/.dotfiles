@@ -5,7 +5,7 @@ Most of the files in here are old / outdated. Need to update...
 ### SSH Config
 ##### Do the thing for me
 ```bash
-git archive --remote=https://github.com/jakeipp/.dotfiles HEAD:path/to/file ssh_config | tar -x -C /etc/ssh/
+git clone https://github.com/jakeipp/.dotfiles && sudo cp .dotfiles/ssh_config /etc/ssh/
 ```
 
 ##### Just the changes
